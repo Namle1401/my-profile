@@ -1,0 +1,433 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Me | My Little World</title>
+<style>
+:root {
+  --bg: #0d1020;
+  --card: #191d35;
+  --text: #f8f8ff;
+  --muted: #a8adc8;
+  --pink: #ff73b3;
+  --purple: #a78bfa;
+  --border: #343854;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+}
+body.light {
+  --bg: #fff8fc;
+  --card: #ffffff;
+  --text: #27213b;
+  --muted: #68627a;
+  --border: #ece0ed;
+}
+a { color: inherit; text-decoration: none; }
+.container { width: min(1050px, 90%); margin: auto; }
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+nav {
+  min-height: 65px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.logo { color: var(--pink); font-size: 22px; font-weight: 800; }
+.links { display: flex; gap: 18px; }
+.links a { font-size: 14px; color: var(--muted); }
+.links a:hover { color: var(--pink); }
+button { cursor: pointer; }
+#theme {
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 9px 12px;
+}
+.hero {
+  text-align: center;
+  padding: 75px 0 55px;
+}
+.avatar {
+  width: 165px;
+  height: 165px;
+  border-radius: 50%;
+  margin: auto;
+  padding: 5px;
+  background: linear-gradient(130deg,var(--pink),var(--purple));
+}
+.avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--card);
+}
+.hello { color: var(--pink); font-weight: 700; }
+h1 { font-size: clamp(34px, 6vw, 56px); margin: 12px 0; }
+.gradient {
+  background: linear-gradient(90deg,var(--pink),var(--purple));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.subtitle {
+  max-width: 620px;
+  margin: 15px auto 25px;
+  color: var(--muted);
+}
+.pill {
+  display: inline-block;
+  padding: 7px 15px;
+  margin: 5px;
+  border-radius: 25px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  font-size: 13px;
+}
+section { padding: 48px 0; scroll-margin-top: 75px; }
+.section-title {
+  font-size: clamp(25px, 4vw, 34px);
+  text-align: center;
+  margin: 0 0 8px;
+}
+.section-desc {
+  color: var(--muted);
+  text-align: center;
+  margin: 0 0 30px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 17px;
+}
+.card {
+  padding: 23px;
+  border-radius: 18px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  transition: transform .2s;
+}
+.card:hover { transform: translateY(-4px); }
+.card .emoji { font-size: 32px; }
+.card h3 { margin: 10px 0 4px; font-size: 17px; }
+.card p { color: var(--muted); margin: 0; font-size: 15px; }
+.about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.info {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid var(--border);
+  padding: 12px 0;
+}
+.info span { color: var(--muted); }
+.info strong { text-align: right; }
+.favorites {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 18px;
+}
+.favorite {
+  padding: 25px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+}
+.favorite h3 { margin: 0 0 12px; }
+.favorite p { color: var(--muted); }
+.quote {
+  text-align: center;
+  padding: 45px 25px;
+  border-radius: 22px;
+  background: linear-gradient(120deg,#61284e,#39316b);
+  color: white;
+}
+.quote h2 { font-size: clamp(22px,4vw,32px); }
+.socials {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+.socials a {
+  background: var(--card);
+  padding: 12px 20px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.socials a:hover { border-color: var(--pink); }
+footer {
+  text-align: center;
+  padding: 30px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 13px;
+}
+@media(max-width:750px) {
+  .links { display: none; }
+  .grid { grid-template-columns: repeat(2,1fr); }
+  .about { grid-template-columns: 1fr; }
+  .hero { padding-top: 48px; }
+}
+@media(max-width:480px) {
+  .container { width: 91%; }
+  .grid,.favorites { grid-template-columns: 1fr; }
+  section { padding: 35px 0; }
+  .avatar { width: 140px; height: 140px; }
+  .card { padding: 20px; }
+}
+.application-card {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 35px;
+  border: 1px solid var(--pink);
+  background: linear-gradient(
+    135deg,
+    var(--card),
+    var(--bg)
+  );
+}
+
+.application-card h3 {
+  color: var(--pink);
+  font-size: 22px;
+}
+
+.application-card p {
+  margin-top: 16px;
+  line-height: 1.9;
+}
+
+@media (max-width: 480px) {
+  .application-card {
+    padding: 22px;
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="container">
+    <a class="logo" href="#home">♡ My CV</a>
+    <div class="links">
+      <a href="#about">Về mình</a>
+      <a href="#hobbies">Sở thích</a>
+      <a href="#favorites">Yêu thích</a>
+      <a href="#contact">Liên hệ</a>
+      <a href="#application">Ứng tuyển</a>
+    </div>
+    <button id="theme" onclick="toggleTheme()">☀️</button>
+  </nav>
+</header>
+
+<main>
+<section class="hero container" id="home">
+  <div class="avatar">
+    <img src="avatar.jpg" alt="Ảnh đại diện của mình">
+  </div>
+  <p class="hello">✨ Welcome to my little world ✨</p>
+  <h1>Hi, mình là <span class="gradient">NamLe</span> ♡</h1>
+  <p class="subtitle">
+    Một người đẹp trai bình thường với những sở thích nhỏ bé bình thường,
+    thích khám phá những điều mới mẻ bình thường, nghe nhạc, ăn ngon
+    và tận hưởng những khoảnh khắc vui vẻ bình thường trong cuộc sống.
+  </p>
+  <span class="pill">🎂 22 tuổi</span>
+  <span class="pill">📍 Việt Nam</span>
+  <span class="pill">♑ Ma Kết</span>
+  <span class="pill">💗 Iu kho báu</span>
+</section>
+
+<section id="about" class="container">
+  <h2 class="section-title">🌷 Một chút về <span class="gradient">mình</span></h2>
+  <p class="section-desc">Cùng tìm hiểu mình là người như thế nào nhé!</p>
+  <div class="about">
+    <div class="card">
+      <h3>🪪 Thông tin cá nhân</h3>
+      <div class="info"><span>Họ tên</span><strong>Lê Hữu Nam</strong></div>
+      <div class="info"><span>Biệt danh</span><strong>Bớp</strong></div>
+      <div class="info"><span>Ngày sinh</span><strong>14/01/2004</strong></div>
+      <div class="info"><span>Giới tính</span><strong>Nam</strong></div>
+      <div class="info"><span>Chiều cao</span><strong>Thấp hơn cái tôi của em</strong></div>
+      <div class="info"><span>Cân nặng</span><strong>60 kg</strong></div>
+      <div class="info"><span>Quê quán</span><strong>Việt Nam</strong></div>
+      <div class="info"><span>Cung hoàng đạo</span><strong>Ma Kết</strong></div>
+      <div class="info"><span>Tình trạng</span><strong>iu lắm 💗</strong></div>
+    </div>
+    <div class="card">
+      <h3>💌 Tính cách của mình</h3>
+      <p>
+        Lúc mới gặp có thể mình hơi ít nói,
+        nhưng khi thân rồi thì nói khá nhiều.
+        Mình thích sự đáng iu, tốt bụng và
+        những người mang lại năng lượng tích cực (hay làm mình cười).
+      </p>
+      <br>
+      <h3>🌻 Ba từ miêu tả mình</h3>
+      <span class="pill">😊 Vui vẻ 我想你</span>
+      <span class="pill">🤍 Chân thành 我爱你</span>
+      <span class="pill">🌙 Hơi hướng nội 梅芳</span>
+      <br><br>
+      <h3>💭 Điều mình trân trọng</h3>
+      <p>Gia đình, bạn bè, những kỷ niệm đẹp và sự bình yên.</p>
+    </div>
+  </div>
+</section>
+
+<section id="hobbies" class="container">
+  <h2 class="section-title">🎨 Sở thích <span class="gradient">của mình</span></h2>
+  <p class="section-desc">Những hoạt động khiến mình vui hơn mỗi ngày.</p>
+  <div class="grid">
+    <div class="card">
+      <div class="emoji">🎧</div>
+      <h3>Nghe nhạc</h3>
+      <p>Thích nghe void khi thư giãn, đi chơi hoặc trước khi ngủ.</p>
+    </div>
+    <div class="card">
+      <div class="emoji">🎮</div>
+      <h3>Chơi game</h3>
+      <p>Chơi game pubg mobile và nghiện game.</p>
+    </div>
+    <div class="card">
+      <div class="emoji">🍜</div>
+      <h3>Ăn uống</h3>
+      <p>Khám phá những quán ăn ngon và món ăn mới, đặc biệt là em.</p>
+    </div>
+    <div class="card">
+      <div class="emoji">🎬</div>
+      <h3>Xem phim</h3>
+      <p>Thích những bộ phim thú vị và có cốt truyện hấp dẫn như phim AI.</p>
+    </div>
+    <div class="card">
+      <div class="emoji">📸</div>
+      <h3>Chụp ảnh</h3>
+      <p>Lưu giữ những khoảnh khắc đẹp của cuộc sống, mong rằng sau này album sẽ thật nhiều ảnh ai đó.</p>
+    </div>
+    <div class="card">
+      <div class="emoji">✈️</div>
+      <h3>Du lịch</h3>
+      <p>Muốn khám phá thật nhiều vùng đất và trải nghiệm mới mang tên "Truy tìm kho báu".</p>
+    </div>
+  </div>
+</section>
+
+<section id="favorites" class="container">
+  <h2 class="section-title">💖 Những thứ mình <span class="gradient">yêu thích</span></h2>
+  <p class="section-desc">Một vài lựa chọn nhỏ nói lên sở thích của mình.</p>
+  <div class="favorites">
+    <div class="favorite">
+      <h3>🍕 Đồ ăn & đồ uống</h3>
+      <p>🍜 Món ăn: Phở, lẩu, đồ nướng, cơm</p>
+      <p>🧋 Đồ uống: Trà sữa, các loại trà, ghét nước lọc</p>
+      <p>🍓 Trái cây: Dâu tây, xoài, dưa hấu</p>
+    </div>
+    <div class="favorite">
+      <h3>🎵 Âm nhạc & giải trí</h3>
+      <p>🎶 Thể loại: Pop, Ballad, K-pop</p>
+      <p>🎤 Ca sĩ yêu thích: Quân AB, Lê Hữu Nam</p>
+      <p>🎬 Phim yêu thích: Ước gì tôi có được em</p>
+    </div>
+    <div class="favorite">
+      <h3>🌈 Những lựa chọn nhỏ</h3>
+      <p>🎨 Màu yêu thích: Hồng</p>
+      <p>🌧️ Thời tiết: Trời lạnh</p>
+      <p>🌙 Thời điểm: Buổi tối</p>
+    </div>
+    <div class="favorite">
+      <h3>🐱 Những điều dễ thương</h3>
+      <p>🐈 Động vật: Mèo và chó bông</p>
+      <p>🎁 Thích: Những món quà bất ngờ</p>
+      <p>💌 Vui khi: Được nắm tay</p>
+    </div>
+  </div>
+</section>
+
+<section class="container">
+  <h2 class="section-title">🤫 Một vài <span class="gradient">fun facts</span></h2>
+  <p class="section-desc">Những điều nho nhỏ và thú vị về mình.</p>
+  <div class="grid">
+    <div class="card"><h3>🌙 Cú đêm</h3><p>Thường đuổi đi ngủ để chơi game.</p></div>
+    <div class="card"><h3>🍔 Mê đồ ăn</h3><p>Muốn ăn cơm bạn P nấu ghê.</p></div>
+    <div class="card"><h3>😂 Dễ cười</h3><p>Lúc trò chuyện cùng người mình iu.</p></div>
+  </div>
+</section>
+
+<section class="container">
+  <div class="quote">
+    <p>♡ My favorite quote ♡</p>
+    <h2>"Dù tớ không chắc con đường này sẽ dẫn mình đến đâu,nhưng tớ hy vọng mình sẽ có thể đi xa hơn một chút."</h2>
+    <p>Even though I'm not sure where this path will lead me, I hope I can go a little further. ✨</p>
+  </div>
+</section>
+
+<section id="contact" class="container">
+  <h2 class="section-title">💌 Kết nối <span class="gradient">với mình</span></h2>
+  <p class="section-desc">Rất vui nếu chúng ta có thể làm quen!</p>
+  <div class="socials">
+    <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer">🌐 Facebook</a>
+    <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer">📸 Instagram</a>
+    <a href="https://tiktok.com/" target="_blank" rel="noopener noreferrer">🎵 TikTok</a>
+  </div>
+</section>
+
+
+<!-- LÝ DO ỨNG TUYỂN -->
+<section id="application" class="container">
+  <h2 class="section-title">
+    💌 Lý do <span class="gradient">ứng tuyển</span>
+  </h2>
+
+  <p class="section-desc">
+    Một chút chia sẻ về lý do mình muốn tham gia buổi phỏng vấn.
+  </p>
+
+  <div class="card application-card">
+    <h3>Tại sao mình muốn ứng tuyển?</h3>
+
+    <p>
+    1 tuần rồi nhớ quáaaaa💖
+    </p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  Made with 💗 
+</footer>
+
+<script>
+function toggleTheme() {
+  document.body.classList.toggle("light");
+  const light = document.body.classList.contains("light");
+  document.getElementById("theme").textContent = light ? "🌙" : "☀️";
+  localStorage.setItem("theme", light ? "light" : "dark");
+}
+if (localStorage.getItem("theme") === "light") {
+  document.body.classList.add("light");
+  document.getElementById("theme").textContent = "🌙";
+}
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
